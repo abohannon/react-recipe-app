@@ -1,5 +1,37 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Raleway', sans-serif;
+}
+
+.cover {
+  position: relative;
+  background-size: cover;
+  height: 33vh;
+  min-height: 200px;
+  vertical-align: bottom;
+  padding-left:35px;
+  padding-right:35px;
+}
+
+.cover::before {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.60) 100%);
+  height: 150px;
+  width: 100%;
+  content: '';
+}
+
+.recipe-title {
+  color: white;
+  font-weight: 200;
+}
+
+.recipe-title {
+  bottom: 0;
+  position: absolute;
 }
