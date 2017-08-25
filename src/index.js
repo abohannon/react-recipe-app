@@ -28,14 +28,14 @@ const RecipeList = () => {
           <h4 className="recipe-title">Chicken Tortilla Soup</h4>
         </div>
         <div className="collapsible-body">
-          <div className="content flow-text">
+          <div className="content">
             <div className="content-top">
           <h5>Directions</h5>
           <hr />
           </div>
-          <p className="flow-text">In a large saucepan heat the vegetable oil. Add the onions and cook for 2 minutes. Once the onions have softened add the garlic and jalepenos and cook for another minute. Pour the chicken broth, tomatoes and beans into the pot and bring to a boil. Once at a boil lower heat to simmer and add your chicken breasts. Cook the chicken for 20 to 25 minutes. Once chicken is cooked remove from pot. When cool enough to handle shred it and set it aside. Add lime juice and fresh cilantro to the pot. In a serving bowl add a mound of shredded chicken. Ladle soup over chicken and top with a lime wedge, grilled tortilla strips, avocado slices and cheese.</p>
+          <p>In a large saucepan heat the vegetable oil. Add the onions and cook for 2 minutes. Once the onions have softened add the garlic and jalepenos and cook for another minute. Pour the chicken broth, tomatoes and beans into the pot and bring to a boil. Once at a boil lower heat to simmer and add your chicken breasts. Cook the chicken for 20 to 25 minutes. Once chicken is cooked remove from pot. When cool enough to handle shred it and set it aside. Add lime juice and fresh cilantro to the pot. In a serving bowl add a mound of shredded chicken. Ladle soup over chicken and top with a lime wedge, grilled tortilla strips, avocado slices and cheese.</p>
         </div>
-        <div className="content flow-text">
+        <div className="content">
           <div className="content-top">
           <h5>Ingredients</h5>
           <hr />
