@@ -12,7 +12,7 @@ const App = () => {
       margin: 'auto',
       marginTop: '3vh'
     }}>
-      <AddRecipe/>
+      <AddRecipeModal/>
       <RecipeList/>
     </div>
   );
@@ -30,33 +30,33 @@ const RecipeList = () => {
         <div className="collapsible-body">
           <div className="content">
             <div className="content-top">
-          <h5>Directions</h5>
-          <hr />
+              <h5>Directions</h5>
+              <hr/>
+            </div>
+            <p>In a large saucepan heat the vegetable oil. Add the onions and cook for 2 minutes. Once the onions have softened add the garlic and jalepenos and cook for another minute. Pour the chicken broth, tomatoes and beans into the pot and bring to a boil. Once at a boil lower heat to simmer and add your chicken breasts. Cook the chicken for 20 to 25 minutes. Once chicken is cooked remove from pot. When cool enough to handle shred it and set it aside. Add lime juice and fresh cilantro to the pot. In a serving bowl add a mound of shredded chicken. Ladle soup over chicken and top with a lime wedge, grilled tortilla strips, avocado slices and cheese.</p>
           </div>
-          <p>In a large saucepan heat the vegetable oil. Add the onions and cook for 2 minutes. Once the onions have softened add the garlic and jalepenos and cook for another minute. Pour the chicken broth, tomatoes and beans into the pot and bring to a boil. Once at a boil lower heat to simmer and add your chicken breasts. Cook the chicken for 20 to 25 minutes. Once chicken is cooked remove from pot. When cool enough to handle shred it and set it aside. Add lime juice and fresh cilantro to the pot. In a serving bowl add a mound of shredded chicken. Ladle soup over chicken and top with a lime wedge, grilled tortilla strips, avocado slices and cheese.</p>
-        </div>
-        <div className="content">
-          <div className="content-top">
-          <h5>Ingredients</h5>
-          <hr />
-        </div>
-          <ul className="recipe-ingredients">
-            <li>2 tablespoons vegetable oil</li>
-            <li>1 small onion, diced</li>
-            <li>2 tablespoons minced garlic</li>
-            <li>2 jalapenos, finely diced</li>
-            <li>6 cups low-sodium chicken broth</li>
-            <li>One 14.5-ounce can fire-roasted diced tomatoes</li>
-            <li>One 14.5-ounce can black beans, rinsed and drained</li>
-            <li>3 chicken breasts, boneless and skinless</li>
-            <li>2 limes, juiced, plus wedges for garnish</li>
-            <li>Salt and freshly ground black pepper</li>
-            <li>1 cup roughly chopped fresh cilantro leaves</li>
-            <li>One 8-inch flour tortilla, grilled, cut into thin strips</li>
-            <li>1 avocado, pitted, sliced</li>
-            <li>1 cup shredded Monterrey cheese</li>
-          </ul>
-        </div>
+          <div className="content">
+            <div className="content-top">
+              <h5>Ingredients</h5>
+              <hr/>
+            </div>
+            <ul className="recipe-ingredients">
+              <li>2 tablespoons vegetable oil</li>
+              <li>1 small onion, diced</li>
+              <li>2 tablespoons minced garlic</li>
+              <li>2 jalapenos, finely diced</li>
+              <li>6 cups low-sodium chicken broth</li>
+              <li>One 14.5-ounce can fire-roasted diced tomatoes</li>
+              <li>One 14.5-ounce can black beans, rinsed and drained</li>
+              <li>3 chicken breasts, boneless and skinless</li>
+              <li>2 limes, juiced, plus wedges for garnish</li>
+              <li>Salt and freshly ground black pepper</li>
+              <li>1 cup roughly chopped fresh cilantro leaves</li>
+              <li>One 8-inch flour tortilla, grilled, cut into thin strips</li>
+              <li>1 avocado, pitted, sliced</li>
+              <li>1 cup shredded Monterrey cheese</li>
+            </ul>
+          </div>
         </div>
       </li>
       <li>
@@ -76,7 +76,64 @@ const RecipeList = () => {
   );
 };
 
-const AddRecipe = () => {
+class RecipeInput extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      title: "",
+      imageUrl: "",
+      instructions: "",
+      ingredients: ""
+    };
+
+  }
+
+  render() {
+    return (
+
+      <div className="modal-content">
+        <h4>Add Recipe</h4>
+        <div className="row">
+          <form className="col s12">
+            <div className="row">
+              <div className="input-field col s12">
+                <input
+                  id="recipe-title"
+                  type="text"
+                  value={this.state.title}
+                  onChange={event => this.onInputChange(event.target.value)}
+                />
+                <label htmlFor="recipe-title">Recipe Title</label>
+              </div>
+              {this.state.title}
+              <div className="input-field col s12">
+                <input id="recipe-image" type="text"/>
+                <label htmlFor="recipe-image">Image URL</label>
+              </div>
+              <div className="input-field col s12">
+                <textarea id="instructions" className="materialize-textarea"></textarea>
+                <label htmlFor="textarea1">Instructions</label>
+              </div>
+              <div className="input-field col s12">
+                <textarea id="ingredients" className="materialize-textarea"></textarea>
+                <label htmlFor="textarea1">Ingredients (comma separated)</label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    );
+  }
+
+  onInputChange(title) {
+    this.setState({title});
+  }
+
+}
+
+const AddRecipeModal = () => {
 
   $(document).ready(function() {
     // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
@@ -90,31 +147,7 @@ const AddRecipe = () => {
       <a className="waves-effect waves-light btn modal-trigger" href="#modal">
         <i className="material-icons right">add</i>Add Recipe</a>
       <div id="modal" className="modal">
-        <div className="modal-content">
-          <h4>Add Recipe</h4>
-          <div className="row">
-            <form className="col s12">
-              <div className="row">
-                <div className="input-field col s12">
-                  <input id="recipe-title" type="text"/>
-                  <label htmlFor="recipe-title">Recipe Title</label>
-                </div>
-                <div className="input-field col s12">
-                  <input id="recipe-image" type="text"/>
-                  <label htmlFor="recipe-image">Image URL</label>
-                </div>
-                <div className="input-field col s12">
-                  <textarea id="instructions" className="materialize-textarea"></textarea>
-                  <label htmlFor="textarea1">Instructions</label>
-                </div>
-                <div className="input-field col s12">
-                  <textarea id="ingredients" className="materialize-textarea"></textarea>
-                  <label htmlFor="textarea1">Ingredients (comma separated)</label>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+        <RecipeInput/>
         <div className="modal-footer">
           <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat">Save Recipe</a>
         </div>
