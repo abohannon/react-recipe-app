@@ -87,6 +87,7 @@ class RecipeInput extends React.Component {
       ingredients: ""
     };
 
+  this.handleChange = this.handleChange.bind(this);
   }
 
   render() {
@@ -102,7 +103,7 @@ class RecipeInput extends React.Component {
                   id="recipe-title"
                   type="text"
                   value={this.state.title}
-                  onChange={event => this.onInputChange(event.target.value)}
+                  onChange={this.handleChange}
                 />
                 <label htmlFor="recipe-title">Recipe Title</label>
               </div>
@@ -127,8 +128,12 @@ class RecipeInput extends React.Component {
     );
   }
 
-  onInputChange(title) {
-    this.setState({title});
+  // methods
+
+  handleChange(event) {
+    this.setState({
+      title: event.target.value
+    });
   }
 
 }
