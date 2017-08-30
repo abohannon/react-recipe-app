@@ -13,19 +13,35 @@ const App = () => {
       marginTop: '3vh'
     }}>
       <AddRecipeModal/>
-      <RecipeList/>
+      <RecipeDisplay />
     </div>
   );
+
 };
 
-const RecipeList = () => {
-  return (
-    <ul className="collapsible" data-collapsible="expandable">
-      <li>
+const RecipeDisplay = () => {
+
+  const recipeList = [
+    {
+      title: `Chicken Tortilla Soup`,
+      imageUrl: `http://farm3.static.flickr.com/2218/4287485981_f0423b9814_z.jpg`,
+      directions: `In a large saucepan heat the vegetable oil. Add the onions and cook for 2 minutes. Once the onions have softened add the garlic and jalepenos and cook for another minute. Pour the chicken broth, tomatoes and beans into the pot and bring to a boil. Once at a boil lower heat to simmer and add your chicken breasts. Cook the chicken for 20 to 25 minutes. Once chicken is cooked remove from pot. When cool enough to handle shred it and set it aside. Add lime juice and fresh cilantro to the pot. In a serving bowl add a mound of shredded chicken. Ladle soup over chicken and top with a lime wedge, grilled tortilla strips, avocado slices and cheese.`,
+      ingredients: `2 tablespoons vegetable oil, 1 small onion, diced, 2 tablespoons minced garlic, 2 jalapenos, finely diced, 6 cups low-sodium chicken broth, One 14.5-ounce can fire-roasted diced tomatoes, One 14.5-ounce can black beans, rinsed and drained, 3 chicken breasts, boneless and skinless, 2 limes, juiced, plus wedges for garnish, Salt and freshly ground black pepper, 1 cup roughly chopped fresh cilantro leaves, One 8-inch flour tortilla, grilled, cut into thin strips, 1 avocado, pitted, sliced, 1 cup shredded Monterrey cheese`
+    }, {
+      title: `Test title`,
+      imageUrl: `http://farm3.static.flickr.com/2218/4287485981_f0423b9814_z.jpg`,
+      directions: `Test description`,
+      ingredients: `Test ingredients`
+    }
+  ];
+
+  const recipeItem = recipeList.map((item => {
+    return (
+      <li key={item.title}>
         <div style={{
-          backgroundImage: "url(http://farm3.static.flickr.com/2218/4287485981_f0423b9814_z.jpg)"
+          backgroundImage: "url(" + item.imageUrl + ")"
         }} className="collapsible-header cover">
-          <h4 className="recipe-title">Chicken Tortilla Soup</h4>
+          <h4 className="recipe-title">{item.title}</h4>
         </div>
         <div className="collapsible-body">
           <div className="content">
@@ -33,7 +49,7 @@ const RecipeList = () => {
               <h5>Directions</h5>
               <hr/>
             </div>
-            <p>In a large saucepan heat the vegetable oil. Add the onions and cook for 2 minutes. Once the onions have softened add the garlic and jalepenos and cook for another minute. Pour the chicken broth, tomatoes and beans into the pot and bring to a boil. Once at a boil lower heat to simmer and add your chicken breasts. Cook the chicken for 20 to 25 minutes. Once chicken is cooked remove from pot. When cool enough to handle shred it and set it aside. Add lime juice and fresh cilantro to the pot. In a serving bowl add a mound of shredded chicken. Ladle soup over chicken and top with a lime wedge, grilled tortilla strips, avocado slices and cheese.</p>
+            <p>{item.directions}</p>
           </div>
           <div className="content">
             <div className="content-top">
@@ -41,37 +57,17 @@ const RecipeList = () => {
               <hr/>
             </div>
             <ul className="recipe-ingredients">
-              <li>2 tablespoons vegetable oil</li>
-              <li>1 small onion, diced</li>
-              <li>2 tablespoons minced garlic</li>
-              <li>2 jalapenos, finely diced</li>
-              <li>6 cups low-sodium chicken broth</li>
-              <li>One 14.5-ounce can fire-roasted diced tomatoes</li>
-              <li>One 14.5-ounce can black beans, rinsed and drained</li>
-              <li>3 chicken breasts, boneless and skinless</li>
-              <li>2 limes, juiced, plus wedges for garnish</li>
-              <li>Salt and freshly ground black pepper</li>
-              <li>1 cup roughly chopped fresh cilantro leaves</li>
-              <li>One 8-inch flour tortilla, grilled, cut into thin strips</li>
-              <li>1 avocado, pitted, sliced</li>
-              <li>1 cup shredded Monterrey cheese</li>
+              <li>{item.ingredients}</li>
             </ul>
           </div>
         </div>
       </li>
-      <li>
-        <div style={{
-          backgroundImage: "url(https://imagesvc.timeincapp.com/v3/mm/image?url=http%3A%2F%2Fcdn-image.foodandwine.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2F201004-xl-classic-ceviche.jpg%3Fitok%3Dpzp2f7gD&w=800&q=60)"
-        }} className="collapsible-header cover">
-          <h4 className="recipe-title">Classic Ceviche</h4>
-        </div>
-        <div className="collapsible-body">
-          <h5>Instructions</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <h5>Recipe</h5>
+    )
+  }));
 
-        </div>
-      </li>
+  return (
+    <ul className="collapsible" data-collapsible="expandable">
+      {recipeItem}
     </ul>
   );
 };
@@ -83,45 +79,48 @@ class RecipeInput extends React.Component {
     this.state = {
       title: "",
       imageUrl: "",
-      instructions: "",
+      directions: "",
       ingredients: ""
     };
 
-  this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   render() {
     return (
+      <div id="modal" className="modal">
+        <div className="modal-content">
+          <h4>Add Recipe</h4>
+          <div className="row">
+            <form className="col s12">
+              <div className="row">
+                <div className="input-field col s12">
+                  <input name="title" type="text" value={this.state.title} onChange={this.handleChange}/>
+                  <label htmlFor="title">Recipe Title</label>
+                </div>
 
-      <div className="modal-content">
-        <h4>Add Recipe</h4>
-        <div className="row">
-          <form className="col s12">
-            <div className="row">
-              <div className="input-field col s12">
-                <input
-                  id="recipe-title"
-                  type="text"
-                  value={this.state.title}
-                  onChange={this.handleChange}
-                />
-                <label htmlFor="recipe-title">Recipe Title</label>
+                <div className="input-field col s12">
+                  <input name="imageUrl" type="text" value={this.state.imageUrl} onChange={this.handleChange}/>
+                  <label htmlFor="recipe-image">Image URL</label>
+                </div>
+
+                <div className="input-field col s12">
+                  <textarea name="directions" className="materialize-textarea" value={this.state.directions} onChange={this.handleChange}/>
+                  <label htmlFor="textarea1">Directions</label>
+                </div>
+
+                <div className="input-field col s12">
+                  <textarea name="ingredients" className="materialize-textarea" value={this.state.ingredients} onChange={this.handleChange}/>
+                  <label htmlFor="textarea2">Ingredients (comma separated)</label>
+                </div>
+
               </div>
-              {this.state.title}
-              <div className="input-field col s12">
-                <input id="recipe-image" type="text"/>
-                <label htmlFor="recipe-image">Image URL</label>
-              </div>
-              <div className="input-field col s12">
-                <textarea id="instructions" className="materialize-textarea"></textarea>
-                <label htmlFor="textarea1">Instructions</label>
-              </div>
-              <div className="input-field col s12">
-                <textarea id="ingredients" className="materialize-textarea"></textarea>
-                <label htmlFor="textarea1">Ingredients (comma separated)</label>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
+        </div>
+        <div className="modal-footer">
+          <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat" onClick={this.handleSubmit}>Save Recipe</a>
         </div>
       </div>
 
@@ -131,9 +130,16 @@ class RecipeInput extends React.Component {
   // methods
 
   handleChange(event) {
-    this.setState({
-      title: event.target.value
-    });
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({[name]: value});
+  }
+
+  handleSubmit(){
+    const newRecipe = {...this.state};
+    console.log("this is new!", newRecipe);
   }
 
 }
@@ -141,7 +147,6 @@ class RecipeInput extends React.Component {
 const AddRecipeModal = () => {
 
   $(document).ready(function() {
-    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
   });
 
@@ -151,12 +156,7 @@ const AddRecipeModal = () => {
     }}>
       <a className="waves-effect waves-light btn modal-trigger" href="#modal">
         <i className="material-icons right">add</i>Add Recipe</a>
-      <div id="modal" className="modal">
-        <RecipeInput/>
-        <div className="modal-footer">
-          <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat">Save Recipe</a>
-        </div>
-      </div>
+      <RecipeInput/>
     </div>
   );
 };
