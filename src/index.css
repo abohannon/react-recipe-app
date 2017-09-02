@@ -71,3 +71,8 @@ hr {
 .modal {
   max-height: 100% !important;
 }
+
+.close-icon {
+  float:right;
+  cursor:pointer;
+}
